@@ -651,29 +651,53 @@ section { padding: 110px 0; }
     50% { box-shadow: 0 10px 30px rgba(37,211,102,.5), 0 0 0 15px rgba(37,211,102,0); }
 }
 
-/* Mobil yol tarifi butonu — sadece mobilde görünür */
-.float-directions {
-    display: none;
-    position: fixed;
-    right: 16px;
-    bottom: calc(max(20px, env(safe-area-inset-bottom)) + 76px);
-    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-    color: #0a0a0a;
-    padding: 12px 18px;
-    border-radius: 999px;
+/* Harita altı Yol Tarifi butonu */
+.map-wrap { position: relative; }
+.map-directions-btn {
+    display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    box-shadow: 0 10px 25px rgba(201,169,97,.45), 0 4px 10px rgba(0,0,0,.2);
-    z-index: 999;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    color: #fff;
     text-decoration: none;
-    border: 2px solid rgba(255,255,255,.15);
+    transition: all .35s var(--transition);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
-.float-directions i { font-size: 16px; }
-.float-directions .float-label { white-space: nowrap; }
-.float-directions:active { transform: scale(.96); }
+.map-directions-btn:hover {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #0a0a0a;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(201,169,97,.35);
+}
+.map-directions-btn:hover .md-icon { background: #0a0a0a; color: var(--gold); }
+.map-directions-btn:hover .md-arrow { transform: translateX(6px); }
+.md-icon {
+    width: 52px; height: 52px;
+    background: var(--gold);
+    color: #0a0a0a;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: all .35s var(--transition);
+}
+.md-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.md-text strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 700;
+    letter-spacing: .3px;
+}
+.md-text small { font-size: 13px; opacity: .7; }
+.md-arrow {
+    font-size: 16px;
+    transition: transform .35s var(--transition);
+    color: var(--gold);
+}
+.map-directions-btn:hover .md-arrow { color: #0a0a0a; }
 
 /* ===== RESPONSIVE ===== */
 
@@ -859,8 +883,11 @@ section { padding: 110px 0; }
         font-size: 28px;
     }
 
-    /* Yol tarifi mobilde aktif */
-    .float-directions { display: inline-flex; }
+    /* Harita altı yol tarifi butonu — mobil kompakt */
+    .map-directions-btn { padding: 14px 18px; gap: 12px; margin-top: 16px; }
+    .md-icon { width: 46px; height: 46px; font-size: 18px; }
+    .md-text strong { font-size: 16px; }
+    .md-text small { font-size: 12px; }
 }
 
 /* Small phones (480px) */
